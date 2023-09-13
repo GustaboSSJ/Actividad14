@@ -13,11 +13,16 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Conteiners extends AppCompatActivity {
 
     private Spinner spinner;
-    private RecyclerView recyclerView;
+
     private CardView cardView;
+    private RecyclerView recyclerView;
+    private ItemAdapter itemAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,5 +65,17 @@ public class Conteiners extends AppCompatActivity {
         
         cardView = findViewById(R.id.cardView); // Reemplaza "cardView" con el ID correcto
 
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        itemAdapter = new ItemAdapter(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        itemAdapter.setData(getData());
+        recyclerView.setAdapter(itemAdapter);
+        recyclerView.setLayoutManager(linearLayoutManager);
     }
+    private List<Item> getData() {
+        List<Item> List = new ArrayList<>();
+        List.add(new Item(R.drawable.pikachu, "Instagram"));
+        List.add(new Item(R.drawable.lucario, "Twitter"));
+        return List;}
 }
+
